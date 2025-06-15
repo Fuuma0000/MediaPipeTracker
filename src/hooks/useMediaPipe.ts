@@ -199,13 +199,19 @@ export const useMediaPipe = () => {
         
         // 番号表示（大きな画面でのみ）
         if (radius > 10) {
+          ctx.save();
+          ctx.translate(x, y);
+          // 水平反転を元に戻す
+          ctx.scale(-1, 1);
+          
           ctx.fillStyle = `rgba(255, 255, 255, ${visibility * 0.9})`;
           ctx.font = `bold ${Math.max(12, radius / 2)}px system-ui, sans-serif`;
           ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
           ctx.shadowBlur = 4;
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
-          ctx.fillText(index.toString(), x, y);
+          ctx.fillText(index.toString(), 0, 0);
+          ctx.restore();
         }
       });
       
